@@ -90,12 +90,7 @@ public class UserIdentityFactory {
   }
 
   private String getName(UserInfo userInfo) {
-    String name = userInfo.getName() != null ? userInfo.getName() : userInfo.getPreferredUsername();
-    if (name == null) {
-      throw new IllegalStateException("Claims 'name' and 'preferred_username' are missing in user info - "
-          + "make sure your OIDC provider supports these claims in the id token or at the user info endpoint");
-    }
-    return name;
+    return userInfo.getSubject().getValue();
   }
 
   private Set<String> getGroups(UserInfo userInfo) {
